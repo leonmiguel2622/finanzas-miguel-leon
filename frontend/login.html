@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-secure="true">
-<!-- Fondo cosmos morado - decorativo -->
 <div class="stars-bg" aria-hidden="true">
   <div id="stars"></div>
   <div id="stars2"></div>
@@ -15,65 +14,79 @@
 </div>
 
 <main class="auth-wrap has-stars">
-  <section class="auth-card" aria-labelledby="login-title">
-    <header>
-      <h1 id="login-title">Finanzas Personales</h1>
-      <p class="sub">Ingresa a tu dashboard</p>
-    </header>
-    <div id="msg" class="msg" role="alert" aria-live="polite"></div>
-    <form id="form-login" novalidate>
-      <fieldset>
-        <legend class="sr-only">Credenciales de acceso</legend>
-        <div>
-          <label for="correo">Correo</label>
-          <input type="email" id="correo" name="correo" required autocomplete="email" placeholder="ana@example.com" maxlength="150">
-        </div>
-        <div>
-          <label for="contrasena">Contraseña</label>
-          <input type="password" id="contrasena" name="contrasena" required placeholder="••••••••" minlength="8" maxlength="72" autocomplete="current-password">
-        </div>
-      </fieldset>
-      <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
-    </form>
-    <footer>
-      <p class="link">¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
-      <p class="auth-demo">Demo: ana@example.com / 12345678</p>
-    </footer>
-  </section>
+  <div class="magic-card">
+    <section class="auth-card" aria-labelledby="login-title">
+      <header>
+        <h1 id="login-title">Finanzas Personales</h1>
+        <p class="sub">Ingresa a tu dashboard</p>
+      </header>
+      <div id="msg" class="msg" role="alert" aria-live="polite"></div>
+      <form id="form-login" novalidate>
+        <fieldset>
+          <legend class="sr-only">Credenciales de acceso</legend>
+          <div>
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" name="correo" required autocomplete="email" placeholder="ana@example.com" maxlength="150">
+          </div>
+          <div>
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" required placeholder="••••••••" minlength="8" maxlength="72" autocomplete="current-password">
+          </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+      </form>
+      <footer>
+        <p class="link">¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+        <p class="auth-demo">Demo: ana@example.com / 12345678</p>
+        <p class="text-muted"><a href="#" id="open-terms">Ver Términos y Cookies</a></p>
+      </footer>
+    </section>
+  </div>
 </main>
+
+<!-- Banner Cookies -->
+<aside id="cookie-banner" class="cookie-banner hidden" role="dialog" aria-label="Consentimiento de cookies">
+  <p>Usamos cookies esenciales para mantener tu sesión y mejorar tu experiencia. Al continuar aceptas nuestro uso de cookies. <a href="#" id="terms-link">Ver Términos</a></p>
+  <div class="cookie-actions">
+    <button id="cookie-decline" class="button is-ghost" type="button">Rechazar</button>
+    <button id="cookie-accept" class="button is-primary" type="button">Aceptar</button>
+  </div>
+</aside>
+
+<!-- Modal Términos -->
+<div id="terms-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+  <article class="modal-container">
+    <header class="modal-container-header">
+      <span class="modal-container-title" id="terms-title">
+        <svg aria-hidden="true" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M14 9V4H5v16h6.056c.328.417.724.785 1.18 1.085l1.39.915H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8v1h-7zm-2 2h9v5.949c0 .99-.501 1.916-1.336 2.465L16.5 21.498l-3.164-2.084A2.953 2.953 0 0 1 12 16.95V11zm2 5.949c0 .316.162.614.436.795l2.064 1.36 2.064-1.36a.954.954 0 0 0 .436-.795V13h-5v3.949z" fill="currentColor"></path></svg>
+        Términos y Condiciones
+      </span>
+      <button class="icon-button" id="close-terms-icon" type="button" aria-label="Cerrar">
+        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="currentColor"></path></svg>
+      </button>
+    </header>
+    <section class="modal-container-body rtf">
+      <p><strong>Última actualización:</strong> 26 de agosto de 2026</p>
+      <h2>1. Uso de cookies</h2>
+      <p>Usamos cookies esenciales para autenticación (<code>id_usuario</code>, <code>nombre</code>) con duración de 7 días y <code>SameSite=Lax</code>. Sin ellas no puedes mantener la sesión. También puedes usar <code>API_URL</code> para apuntar al backend.</p>
+      <h2>2. Datos personales</h2>
+      <p>Tu correo y nombre se almacenan en MySQL con contraseña hasheada con <code>bcrypt</code>. Nunca guardamos texto plano. Puedes solicitar eliminación.</p>
+      <h2>3. Uso aceptable</h2>
+      <p>No intentes bypassear validaciones, inyectar SQL ni abusar de los endpoints. El sistema valida montos &gt;0, fechas y tipos.</p>
+      <h2>4. Limitación</h2>
+      <p>La predicción es estadística (Regresión Lineal) y las anomalías son por Z-Score 1.5. No es asesoría financiera.</p>
+      <p>Al hacer clic en Aceptar confirmas que has leído y aceptas estos términos.</p>
+    </section>
+    <footer class="modal-container-footer">
+      <button class="button is-ghost" id="modal-decline" type="button">Rechazar</button>
+      <button class="button is-primary" id="modal-accept" type="button">Aceptar</button>
+    </footer>
+  </article>
+</div>
+
 <script src="js/security.js"></script>
 <script src="js/api.js"></script>
-<script>
-const form = document.getElementById('form-login');
-const msgEl = document.getElementById('msg');
-function showMsg(text, type){
-  msgEl.textContent=text;
-  msgEl.className='msg show '+(type==='error'?'error':'success');
-}
-form.addEventListener('submit', async (e)=>{
-  e.preventDefault();
-  const correo=document.getElementById('correo').value.trim().toLowerCase();
-  const contrasena=document.getElementById('contrasena').value;
-  // Validación cliente
-  if(!isValidEmail(correo)){ showMsg('Correo no válido','error'); return; }
-  if(!isValidPassword(contrasena)){ showMsg('Contraseña debe tener 8-72 caracteres','error'); return; }
-  const btn=form.querySelector('button');
-  btn.disabled=true; btn.textContent='Ingresando...';
-  try{
-    const data=await apiLogin(correo,contrasena);
-    // Guardar sesión en cookies (7 días) + localStorage fallback
-    setCookie('id_usuario', data.id_usuario, 7);
-    setCookie('nombre', data.nombre, 7);
-    setCookie('correo', data.correo, 7);
-    try{ localStorage.setItem('id_usuario', data.id_usuario); localStorage.setItem('nombre', data.nombre); localStorage.setItem('correo', data.correo); }catch(e){}
-    showMsg('¡Bienvenido '+data.nombre+'! Redirigiendo...','success');
-    setTimeout(()=> location.href='index.html', 800);
-  }catch(err){
-    showMsg(err.message||'Error al ingresar','error');
-  }finally{
-    btn.disabled=false; btn.textContent='Ingresar';
-  }
-});
-</script>
+<script src="js/auth.js"></script>
+<script src="js/consent.js"></script>
 </body>
 </html>

@@ -174,12 +174,46 @@
 </main>
 
 <footer class="site-footer">
-  <p>Finanzas Personales — Proyecto ADSO · Hecho con FastAPI, MySQL y Chart.js</p>
+  <p>Finanzas Personales — Proyecto ADSO · Hecho con FastAPI, MySQL y Chart.js · <a href="#" id="open-terms">Términos</a></p>
 </footer>
+
+<aside id="cookie-banner" class="cookie-banner hidden" role="dialog" aria-label="Consentimiento de cookies">
+  <p>Usamos cookies esenciales para tu sesión. <a href="#" id="terms-link">Ver Términos</a></p>
+  <div class="cookie-actions">
+    <button id="cookie-decline" class="button is-ghost" type="button">Rechazar</button>
+    <button id="cookie-accept" class="button is-primary" type="button">Aceptar</button>
+  </div>
+</aside>
+
+<div id="terms-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+  <article class="modal-container">
+    <header class="modal-container-header">
+      <span class="modal-container-title" id="terms-title">
+        <svg aria-hidden="true" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M14 9V4H5v16h6.056c.328.417.724.785 1.18 1.085l1.39.915H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8v1h-7zm-2 2h9v5.949c0 .99-.501 1.916-1.336 2.465L16.5 21.498l-3.164-2.084A2.953 2.953 0 0 1 12 16.95V11zm2 5.949c0 .316.162.614.436.795l2.064 1.36 2.064-1.36a.954.954 0 0 0 .436-.795V13h-5v3.949z" fill="currentColor"></path></svg>
+        Términos y Condiciones
+      </span>
+      <button class="icon-button" id="close-terms-icon" type="button" aria-label="Cerrar">
+        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="currentColor"></path></svg>
+      </button>
+    </header>
+    <section class="modal-container-body rtf">
+      <p><strong>26 de agosto de 2026</strong></p>
+      <h2>Cookies y sesión</h2>
+      <p>Cookies esenciales <code>id_usuario</code> para mantener login 7 días. Sin ellas no hay acceso al dashboard.</p>
+      <h2>Seguridad</h2>
+      <p>Validación cliente/servidor, contraseñas bcrypt, bloqueo de inspección como ofuscación.</p>
+    </section>
+    <footer class="modal-container-footer">
+      <button class="button is-ghost" id="modal-decline" type="button">Rechazar</button>
+      <button class="button is-primary" id="modal-accept" type="button">Aceptar</button>
+    </footer>
+  </article>
+</div>
 
 <script src="js/security.js"></script>
 <script src="js/api.js"></script>
 <script src="js/charts.js"></script>
 <script src="js/app.js"></script>
+<script src="js/consent.js"></script>
 </body>
 </html>

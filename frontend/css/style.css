@@ -264,6 +264,41 @@ tr:hover td{background:#F9FAFB}
 .auth-card .link a{color:var(--morado);font-weight:700;text-decoration:none}
 .auth-card .link a:hover{text-decoration:underline}
 .auth-demo{margin-top:6px;font-size:0.82rem;color:var(--texto-sec);text-align:center}
+
+/* ---- Magic Card borde (Uiverse adaptado a morado) ---- */
+.magic-card{
+  --background:linear-gradient(to left, #7C3AED 0%, #EC4899 50%, #A78BFA 100%);
+  width:100%;
+  max-width:428px;
+  padding:4px;
+  border-radius:20px;
+  overflow:visible;
+  background:var(--background);
+  position:relative;
+  z-index:1;
+}
+.magic-card::after{
+  position:absolute;
+  content:"";
+  top:18px;
+  left:0;
+  right:0;
+  z-index:-1;
+  height:100%;
+  width:100%;
+  transform:scale(0.85);
+  filter:blur(22px);
+  background:var(--background);
+  transition:opacity .5s;
+  border-radius:20px;
+}
+.magic-card:hover::after{opacity:0}
+.magic-card .auth-card{
+  max-width:none;
+  margin:0;
+  border-radius:16px;
+  border:none;
+}
 .msg{
   padding:10px 12px;
   border-radius:10px;
@@ -373,7 +408,119 @@ tr:hover td{background:#F9FAFB}
   -webkit-text-fill-color:transparent;
 }
 
-/* 07. Utilidades
+/* 07. Cookies & Modal Términos (organizado)
+   ========================================================================== */
+.cookie-banner{
+  position:fixed;
+  left:0; right:0; bottom:0;
+  background:var(--blanco);
+  border-top:1px solid var(--borde);
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 -4px 16px rgba(124,58,237,0.12);
+  z-index:150;
+  flex-wrap:wrap;
+}
+.cookie-banner p{font-size:0.85rem;color:var(--texto-sec);margin:0;flex:1;min-width:220px}
+.cookie-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cookie-banner a{color:var(--morado);font-weight:600}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(15,10,30,0.55);
+  backdrop-filter:blur(4px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:200;
+}
+.modal.open{display:flex}
+.modal-container{
+  max-height:85vh;
+  max-width:560px;
+  width:100%;
+  margin:0 auto;
+  background-color:var(--blanco);
+  border-radius:16px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 15px 30px rgba(0,0,0,0.25);
+  border:1px solid var(--borde);
+}
+.modal-container-header{
+  padding:16px 24px;
+  border-bottom:1px solid var(--borde);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--morado-suave);
+}
+.modal-container-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  line-height:1;
+  font-weight:700;
+  font-size:1.05rem;
+  color:var(--morado-oscuro);
+}
+.modal-container-title svg{width:26px;height:26px;color:var(--morado)}
+.modal-container-body{
+  padding:20px 24px 24px;
+  overflow-y:auto;
+  font-size:0.9rem;
+  color:var(--texto);
+  line-height:1.6;
+}
+.modal-container-footer{
+  padding:16px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  border-top:1px solid var(--borde);
+  gap:10px;
+  background:var(--blanco);
+  position:relative;
+}
+.modal-container-footer::after{
+  content:"";
+  display:block;
+  position:absolute;
+  top:-40px;
+  left:20px;
+  right:20px;
+  height:40px;
+  background-image:linear-gradient(to top, rgba(255,255,255,0.9), transparent);
+  pointer-events:none;
+}
+.rtf h1,.rtf h2,.rtf h3,.rtf h4{font-weight:700;color:var(--texto)}
+.rtf h1{font-size:1.35rem}
+.rtf h2{font-size:1.15rem}
+.rtf h3{font-size:1rem}
+.rtf > * + *{margin-top:0.9em}
+.rtf ul,.rtf ol{margin-left:18px}
+.rtf ol{list-style:decimal}
+.rtf ul{list-style:disc}
+.button{padding:10px 18px;border-radius:8px;border:0;font-weight:600;cursor:pointer;transition:.15s ease;font:inherit}
+.button.is-ghost{background:transparent;color:var(--texto)}
+.button.is-ghost:hover{background:var(--morado-suave)}
+.button.is-primary{background:var(--morado);color:white}
+.button.is-primary:hover{background:var(--morado-oscuro)}
+.icon-button{
+  padding:0;border:0;background:transparent;width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:8px;cursor:pointer;transition:.15s;
+}
+.icon-button:hover{background:var(--morado-suave)}
+.icon-button svg{width:22px;height:22px}
+
+/* 08. Utilidades
    ========================================================================== */
 .hidden{display:none !important}
 .btn-block{width:100%}
@@ -393,7 +540,7 @@ tr:hover td{background:#F9FAFB}
 figure{margin:0}
 figcaption{font-weight:600;text-align:center;margin-bottom:8px}
 
-/* 08. Animaciones
+/* 09. Animaciones
    ========================================================================== */
 @keyframes animStar{
   from{transform:translateY(0)}
@@ -404,7 +551,7 @@ figcaption{font-weight:600;text-align:center;margin-bottom:8px}
   100%{opacity:1;transform:translateY(0)}
 }
 
-/* 09. Responsive
+/* 10. Responsive
    ========================================================================== */
 @media(max-width:900px){
   .charts-grid{grid-template-columns:1fr}
