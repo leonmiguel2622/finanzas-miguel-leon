@@ -12,15 +12,14 @@ load_dotenv()
 
 def conectar():
     return pymysql.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        user=os.getenv("DB_USER", "root"),
-        password=os.getenv("DB_PASSWORD", ""),
-        database=os.getenv("DB_NAME", "finanzas_personales"),
-        port=int(os.getenv("DB_PORT", "3306")),
-        charset="utf8mb4",
-        cursorclass=pymysql.cursors.DictCursor,
-        autocommit=True
+        host="bhoaaacrey4xvrzjdpdc-mysql.services.clever-cloud.com",
+        user="u9rbmsykuc9xheqr",
+        password="u9rbmsykuc9xheqr", 
+        database="bhoaaacrey4xvrzjdpdc",
+        port=3306,
+        cursorclass=pymysql.cursors.DictCursor
     )
+
 
 # Ejemplo de uso rápido (como en sigirec):
 if __name__ == "__main__":
