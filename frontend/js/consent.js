@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     return (typeof getCookie==='function' ? getCookie(CONSENT_KEY) : null) === 'true';
   }
 
-  // Mostrar banner si no hay consentimiento
-  if(banner && !hasConsent()){
-    banner.classList.remove('hidden');
+  // Banner visible por defecto (sin hidden). Ocultar solo si ya hay consentimiento.
+  if(banner && hasConsent()){
+    banner.classList.add('hidden');
   }
 
   function acceptConsent(){
