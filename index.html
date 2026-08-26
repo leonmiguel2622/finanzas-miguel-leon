@@ -3,27 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finanzas Personales - Proyecto ADSO</title>
+<title>Ingresar - Finanzas Personales</title>
 <link rel="stylesheet" href="frontend/css/style.css">
-<meta http-equiv="refresh" content="0; url=frontend/login.html">
 </head>
 <body>
 <main class="auth-wrap">
-  <section class="auth-card" aria-labelledby="landing-title">
+  <section class="auth-card" aria-labelledby="login-title">
     <header>
-      <h1 id="landing-title">Finanzas Personales</h1>
-      <p class="sub">Redirigiendo a la aplicación...</p>
+      <h1 id="login-title">Finanzas Personales</h1>
+      <p class="sub">Ingresa a tu dashboard</p>
     </header>
-    <p class="panel-note">Si no eres redirigido automáticamente, entra a:</p>
-    <nav aria-label="Accesos">
-      <p><a href="frontend/login.html" class="btn btn-primary btn-block">Ir al Login</a></p>
-      <p><a href="frontend/register.html" class="btn btn-ghost btn-block">Crear cuenta</a></p>
-      <p><a href="frontend/index.html" class="btn btn-ghost btn-block">Dashboard (requiere login)</a></p>
-    </nav>
+    <div id="msg" class="msg" role="alert" aria-live="polite"></div>
+    <form id="form-login">
+      <fieldset>
+        <legend class="sr-only">Credenciales de acceso</legend>
+        <div>
+          <label for="correo">Correo</label>
+          <input type="email" id="correo" name="correo" required autocomplete="email" placeholder="ana@example.com">
+        </div>
+        <div>
+          <label for="contrasena">Contraseña</label>
+          <input type="password" id="contrasena" name="contrasena" required placeholder="••••••••" minlength="8" autocomplete="current-password">
+        </div>
+      </fieldset>
+      <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+    </form>
     <footer>
-      <p class="text-muted">Nota: GitHub Pages solo sirve el frontend estático. El backend FastAPI + MySQL debe estar corriendo en local (<code>http://127.0.0.1:8000</code>) o desplegado en Render/Railway. Ver <a href="README.md">README</a> para instrucciones.</p>
+      <p class="link">¿No tienes cuenta? <a href="frontend/register.html">Regístrate aquí</a></p>
+      <p class="auth-demo">Demo: ana@example.com / 12345678</p>
+      <p class="text-muted">Frontend estático en GitHub Pages. El backend FastAPI debe estar desplegado para ver datos reales.</p>
     </footer>
   </section>
 </main>
+<script src="frontend/js/api.js"></script>
+<script>
+const form = document.getElementById('form-login');
+const msgEl = document.getElementById('msg');
+function showMsg(text, type){
+  msgEl.textContent=text;
+  msgEl.className='msg show '+(type==='error'?'error':'success');
+}
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const correo=document.getElementById('correo').value.trim();
+  const contrasena=document.getElementById('contrasena').value;
+  const btn=form.querySelector('button');
+  btn.disabled=true; btn.textContent='Ingresando...';
+  try{
+    const data=await apiLogin(correo,contrasena);
+    localStorage.setItem('id_usuario', data.id_usuario);
+    localStorage.setItem('nombre', data.nombre);
+    localStorage.setItem('correo', data.correo);
+    showMsg('¡Bienvenido '+data.nombre+'! Redirigiendo...','success');
+    setTimeout(()=> location.href='frontend/index.html', 800);
+  }catch(err){
+    showMsg(err.message||'Error al ingresar','error');
+  }finally{
+    btn.disabled=false; btn.textContent='Ingresar';
+  }
+});
+</script>
 </body>
 </html>
