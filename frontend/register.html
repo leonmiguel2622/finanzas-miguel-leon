@@ -7,29 +7,36 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="auth-wrap">
-  <div class="auth-card">
-    <h1>Crear cuenta</h1>
-    <p class="sub">Empieza a controlar tus finanzas</p>
-    <div id="msg" class="msg"></div>
+<main class="auth-wrap">
+  <section class="auth-card" aria-labelledby="register-title">
+    <header>
+      <h1 id="register-title">Crear cuenta</h1>
+      <p class="sub">Empieza a controlar tus finanzas</p>
+    </header>
+    <div id="msg" class="msg" role="alert" aria-live="polite"></div>
     <form id="form-register">
-      <div>
-        <label>Nombre</label>
-        <input type="text" id="nombre" required placeholder="Ana Torres" maxlength="100">
-      </div>
-      <div>
-        <label>Correo</label>
-        <input type="email" id="correo" required placeholder="ana@example.com">
-      </div>
-      <div>
-        <label>Contraseña (mín 8)</label>
-        <input type="password" id="contrasena" required minlength="8" placeholder="••••••••">
-      </div>
-      <button type="submit" class="btn btn-primary" style="width:100%">Crear cuenta</button>
+      <fieldset>
+        <legend class="sr-only">Datos de registro</legend>
+        <div>
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Ana Torres" maxlength="100" autocomplete="name">
+        </div>
+        <div>
+          <label for="correo">Correo</label>
+          <input type="email" id="correo" name="correo" required placeholder="ana@example.com" autocomplete="email">
+        </div>
+        <div>
+          <label for="contrasena">Contraseña (mín 8)</label>
+          <input type="password" id="contrasena" name="contrasena" required minlength="8" placeholder="••••••••" autocomplete="new-password">
+        </div>
+      </fieldset>
+      <button type="submit" class="btn btn-primary btn-block">Crear cuenta</button>
     </form>
-    <p class="link">¿Ya tienes cuenta? <a href="login.html">Ingresa aquí</a></p>
-  </div>
-</div>
+    <footer>
+      <p class="link">¿Ya tienes cuenta? <a href="login.html">Ingresa aquí</a></p>
+    </footer>
+  </section>
+</main>
 <script src="js/api.js"></script>
 <script>
 const msgEl=document.getElementById('msg');
@@ -43,7 +50,7 @@ document.getElementById('form-register').addEventListener('submit', async(e)=>{
   };
   const btn=e.target.querySelector('button'); btn.disabled=true; btn.textContent='Creando...';
   try{
-    const data=await apiRegister(payload);
+    await apiRegister(payload);
     showMsg('¡Cuenta creada! Redirigiendo al login...','success');
     setTimeout(()=>location.href='login.html',1200);
   }catch(err){

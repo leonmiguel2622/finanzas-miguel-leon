@@ -7,26 +7,33 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="auth-wrap">
-  <div class="auth-card">
-    <h1> Finanzas Personales</h1>
-    <p class="sub">Ingresa a tu dashboard</p>
-    <div id="msg" class="msg"></div>
+<main class="auth-wrap">
+  <section class="auth-card" aria-labelledby="login-title">
+    <header>
+      <h1 id="login-title">Finanzas Personales</h1>
+      <p class="sub">Ingresa a tu dashboard</p>
+    </header>
+    <div id="msg" class="msg" role="alert" aria-live="polite"></div>
     <form id="form-login">
-      <div>
-        <label>Correo</label>
-        <input type="email" id="correo" required placeholder="ana@example.com">
-      </div>
-      <div>
-        <label>Contraseña</label>
-        <input type="password" id="contrasena" required placeholder="••••••••" minlength="8">
-      </div>
-      <button type="submit" class="btn btn-primary" style="width:100%">Ingresar</button>
+      <fieldset>
+        <legend class="sr-only">Credenciales de acceso</legend>
+        <div>
+          <label for="correo">Correo</label>
+          <input type="email" id="correo" name="correo" required autocomplete="email" placeholder="ana@example.com">
+        </div>
+        <div>
+          <label for="contrasena">Contraseña</label>
+          <input type="password" id="contrasena" name="contrasena" required placeholder="••••••••" minlength="8" autocomplete="current-password">
+        </div>
+      </fieldset>
+      <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
     </form>
-    <p class="link">¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
-    <p class="link" style="margin-top:6px;font-size:0.82rem;color:#6B7280">Demo: ana@example.com / 12345678</p>
-  </div>
-</div>
+    <footer>
+      <p class="link">¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+      <p class="auth-demo">Demo: ana@example.com / 12345678</p>
+    </footer>
+  </section>
+</main>
 <script src="js/api.js"></script>
 <script>
 const form = document.getElementById('form-login');
@@ -54,9 +61,6 @@ form.addEventListener('submit', async (e)=>{
     btn.disabled=false; btn.textContent='Ingresar';
   }
 });
-if(localStorage.getItem('id_usuario')){
-  // opcional auto-redirect si ya logueado
-}
 </script>
 </body>
 </html>

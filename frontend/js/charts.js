@@ -9,12 +9,12 @@ function renderDona(porCategoria){
   if(!ctx) return;
   if(!porCategoria || porCategoria.length===0){
     if(chartDona){ chartDona.destroy(); chartDona=null; }
-    ctx.style.display='none';
-    empty.style.display='block';
+    ctx.classList.add('hidden');
+    empty.classList.remove('hidden');
     return;
   }
-  ctx.style.display='block';
-  empty.style.display='none';
+  ctx.classList.remove('hidden');
+  empty.classList.add('hidden');
   const labels = porCategoria.map(c=>c.categoria);
   const data = porCategoria.map(c=>c.total);
   const backgroundColor = labels.map((_,i)=> PALETTE[i % PALETTE.length]);
@@ -41,12 +41,12 @@ function renderTendencia(tendencia){
   if(!ctx) return;
   if(!tendencia || tendencia.length===0){
     if(chartTendencia){ chartTendencia.destroy(); chartTendencia=null; }
-    ctx.style.display='none';
-    empty.style.display='block';
+    ctx.classList.add('hidden');
+    empty.classList.remove('hidden');
     return;
   }
-  ctx.style.display='block';
-  empty.style.display='none';
+  ctx.classList.remove('hidden');
+  empty.classList.add('hidden');
   const labels = tendencia.map(t=>t.mes);
   const ingresos = tendencia.map(t=>t.ingresos);
   const gastos = tendencia.map(t=>t.gastos);

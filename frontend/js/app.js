@@ -75,7 +75,7 @@ async function cargarResumen(){
     document.getElementById('card-gastos').textContent = fmtMoney(data.total_gastos);
     const balEl=document.getElementById('card-balance');
     balEl.textContent = fmtMoney(data.balance);
-    balEl.style.color = data.balance<0 ? '#EF4444' : '';
+    balEl.classList.toggle('monto-negativo', data.balance < 0);
     document.getElementById('card-balance-sub').textContent = `${data.porcentaje_ahorro}% ahorro · ${data.total_movimientos} movs`;
     // Gráficos con datos reales
     renderDona(data.gastos_por_categoria);
@@ -147,8 +147,8 @@ async function cargarMovimientos(){
         <td>${r.fecha}</td>
         <td>${r.categoria_nombre}</td>
         <td><span class="badge ${r.tipo==='ingreso'?'badge-ingreso':'badge-gasto'}">${r.tipo}</span></td>
-        <td style="font-weight:700;color:${r.tipo==='ingreso'?'#065F46':'#991B1B'}">${fmtMoney(r.monto)}</td>
-        <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis">${r.descripcion||''}</td>
+        <td class="${r.tipo==='ingreso'?'monto-ingreso':'monto-gasto'}">${fmtMoney(r.monto)}</td>
+        <td><span class="descripcion-cell">${r.descripcion||''}</span></td>
         <td>
           <button class="btn btn-ghost btn-small" onclick="editarMovimiento(${r.id_movimiento})">Editar</button>
           <button class="btn btn-danger btn-small" onclick="eliminarMovimiento(${r.id_movimiento})">Eliminar</button>
@@ -229,7 +229,7 @@ document.getElementById('form-movimiento').addEventListener('submit', async(e)=>
       await apiUpdateMovimiento(editId, { id_categoria: payload.id_categoria, tipo: payload.tipo, monto: payload.monto, fecha: payload.fecha, descripcion: payload.descripcion });
       document.getElementById('edit-id').value='';
       document.querySelector('#form-movimiento button[type="submit"]').textContent='Guardar';
-      document.getElementById('btn-cancelar-edicion').style.display='none';
+      document.getElementById('btn-cancelar-edicion').classList.add('hidden');
     } else {
       await apiCreateMovimiento(payload);
     }
@@ -242,7 +242,7 @@ document.getElementById('btn-cancelar-edicion').addEventListener('click', ()=>{
   document.getElementById('edit-id').value='';
   document.getElementById('form-movimiento').reset();
   document.querySelector('#form-movimiento button[type="submit"]').textContent='Guardar';
-  document.getElementById('btn-cancelar-edicion').style.display='none';
+  document.getElementById('btn-cancelar-edicion').classList.add('hidden');
 });
 
 window.editarMovimiento = async(id)=>{
@@ -257,7 +257,7 @@ window.editarMovimiento = async(id)=>{
     setTimeout(()=>{ document.getElementById('categoria').value = r.id_categoria; },150);
     document.getElementById('descripcion').value = r.descripcion||'';
     document.querySelector('#form-movimiento button[type="submit"]').textContent='Actualizar';
-    document.getElementById('btn-cancelar-edicion').style.display='inline-block';
+    document.getElementById('btn-cancelar-edicion').classList.remove('hidden');
     window.scrollTo({top: document.getElementById('form-movimiento').offsetTop -80, behavior:'smooth'});
   }catch(e){ alert(e.message); }
 };
