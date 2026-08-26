@@ -1,14 +1,17 @@
-const USER_ID = parseInt(localStorage.getItem('id_usuario')||'0');
-const USER_NOMBRE = localStorage.getItem('nombre')||'';
+const USER_ID = parseInt((typeof getCookie==='function' ? getCookie('id_usuario') : null) || localStorage.getItem('id_usuario')||'0');
+const USER_NOMBRE = (typeof getCookie==='function' ? getCookie('nombre') : null) || localStorage.getItem('nombre')||'';
 if(!USER_ID){
   location.href='login.html';
 }
 
 document.getElementById('user-info').textContent = `${USER_NOMBRE} (#${USER_ID})`;
 document.getElementById('btn-logout').addEventListener('click', ()=>{
-  localStorage.removeItem('id_usuario');
-  localStorage.removeItem('nombre');
-  localStorage.removeItem('correo');
+  if(typeof clearSession==='function') clearSession();
+  else {
+    localStorage.removeItem('id_usuario');
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('correo');
+  }
   location.href='login.html';
 });
 
@@ -183,11 +186,11 @@ document.getElementById('tipo').addEventListener('change', cargarCategorias);
 // Crear categoría
 document.getElementById('form-categoria').addEventListener('submit', async(e)=>{
   e.preventDefault();
-  const payload={
-    nombre: document.getElementById('cat-nombre').value.trim(),
-    tipo: document.getElementById('cat-tipo').value,
-    id_usuario: USER_ID
-  };
+  const nombre = document.getElementById('cat-nombre').value.trim();
+  const tipo = document.getElementById('cat-tipo').value;
+  if(nombre.length < 2){ alert('Nombre de categoría mínimo 2 caracteres'); return; }
+  if(!['ingreso','gasto'].includes(tipo)){ alert('Tipo inválido'); return; }
+  const payload={ nombre, tipo, id_usuario: USER_ID };
   try{
     await apiCreateCategoria(payload);
     document.getElementById('form-categoria').reset();
@@ -223,7 +226,12 @@ document.getElementById('form-movimiento').addEventListener('submit', async(e)=>
     descripcion: document.getElementById('descripcion').value.trim()||null
   };
   if(!payload.id_categoria){ alert('Selecciona categoría'); return; }
-  if(payload.monto<=0){ alert('Monto debe ser >0'); return; }
+  if(!payload.monto || isNaN(payload.monto) || payload.monto<=0){ alert('Monto debe ser mayor a 0'); return; }
+  if(!payload.fecha){ alert('Fecha requerida'); return; }
+  // Validar fecha no muy futura (máximo hoy)
+  const hoy = new Date().toISOString().split('T')[0];
+  if(payload.fecha > hoy){ alert('La fecha no puede ser futura'); return; }
+  if(payload.descripcion && payload.descripcion.length>255){ alert('Descripción máximo 255 caracteres'); return; }
   try{
     if(editId){
       await apiUpdateMovimiento(editId, { id_categoria: payload.id_categoria, tipo: payload.tipo, monto: payload.monto, fecha: payload.fecha, descripcion: payload.descripcion });

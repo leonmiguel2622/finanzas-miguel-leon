@@ -1,5 +1,9 @@
 const API_URL = (() => {
-  // Permite override con localStorage API_URL para deploy
+  try{
+    // override con cookie o localStorage para deploy
+    const c = document.cookie.match(/(?:^|; )API_URL=([^;]*)/);
+    if(c) return decodeURIComponent(c[1]);
+  }catch(e){}
   return localStorage.getItem('API_URL') || 'http://127.0.0.1:8000/api';
 })();
 

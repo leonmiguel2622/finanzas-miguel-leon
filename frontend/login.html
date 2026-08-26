@@ -6,7 +6,7 @@
 <title>Ingresar - Finanzas Personales</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-secure="true">
 <!-- Fondo cosmos morado - decorativo -->
 <div class="stars-bg" aria-hidden="true">
   <div id="stars"></div>
@@ -21,16 +21,16 @@
       <p class="sub">Ingresa a tu dashboard</p>
     </header>
     <div id="msg" class="msg" role="alert" aria-live="polite"></div>
-    <form id="form-login">
+    <form id="form-login" novalidate>
       <fieldset>
         <legend class="sr-only">Credenciales de acceso</legend>
         <div>
           <label for="correo">Correo</label>
-          <input type="email" id="correo" name="correo" required autocomplete="email" placeholder="ana@example.com">
+          <input type="email" id="correo" name="correo" required autocomplete="email" placeholder="ana@example.com" maxlength="150">
         </div>
         <div>
           <label for="contrasena">Contraseña</label>
-          <input type="password" id="contrasena" name="contrasena" required placeholder="••••••••" minlength="8" autocomplete="current-password">
+          <input type="password" id="contrasena" name="contrasena" required placeholder="••••••••" minlength="8" maxlength="72" autocomplete="current-password">
         </div>
       </fieldset>
       <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
@@ -41,6 +41,7 @@
     </footer>
   </section>
 </main>
+<script src="js/security.js"></script>
 <script src="js/api.js"></script>
 <script>
 const form = document.getElementById('form-login');
@@ -51,15 +52,20 @@ function showMsg(text, type){
 }
 form.addEventListener('submit', async (e)=>{
   e.preventDefault();
-  const correo=document.getElementById('correo').value.trim();
+  const correo=document.getElementById('correo').value.trim().toLowerCase();
   const contrasena=document.getElementById('contrasena').value;
+  // Validación cliente
+  if(!isValidEmail(correo)){ showMsg('Correo no válido','error'); return; }
+  if(!isValidPassword(contrasena)){ showMsg('Contraseña debe tener 8-72 caracteres','error'); return; }
   const btn=form.querySelector('button');
   btn.disabled=true; btn.textContent='Ingresando...';
   try{
     const data=await apiLogin(correo,contrasena);
-    localStorage.setItem('id_usuario', data.id_usuario);
-    localStorage.setItem('nombre', data.nombre);
-    localStorage.setItem('correo', data.correo);
+    // Guardar sesión en cookies (7 días) + localStorage fallback
+    setCookie('id_usuario', data.id_usuario, 7);
+    setCookie('nombre', data.nombre, 7);
+    setCookie('correo', data.correo, 7);
+    try{ localStorage.setItem('id_usuario', data.id_usuario); localStorage.setItem('nombre', data.nombre); localStorage.setItem('correo', data.correo); }catch(e){}
     showMsg('¡Bienvenido '+data.nombre+'! Redirigiendo...','success');
     setTimeout(()=> location.href='index.html', 800);
   }catch(err){

@@ -6,7 +6,7 @@
 <title>Registro - Finanzas Personales</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-secure="true">
 <main class="auth-wrap">
   <section class="auth-card" aria-labelledby="register-title">
     <header>
@@ -14,7 +14,7 @@
       <p class="sub">Empieza a controlar tus finanzas</p>
     </header>
     <div id="msg" class="msg" role="alert" aria-live="polite"></div>
-    <form id="form-register">
+    <form id="form-register" novalidate>
       <fieldset>
         <legend class="sr-only">Datos de registro</legend>
         <div>
@@ -23,11 +23,11 @@
         </div>
         <div>
           <label for="correo">Correo</label>
-          <input type="email" id="correo" name="correo" required placeholder="ana@example.com" autocomplete="email">
+          <input type="email" id="correo" name="correo" required placeholder="ana@example.com" maxlength="150" autocomplete="email">
         </div>
         <div>
           <label for="contrasena">Contraseña (mín 8)</label>
-          <input type="password" id="contrasena" name="contrasena" required minlength="8" placeholder="••••••••" autocomplete="new-password">
+          <input type="password" id="contrasena" name="contrasena" required minlength="8" maxlength="72" placeholder="••••••••" autocomplete="new-password">
         </div>
       </fieldset>
       <button type="submit" class="btn btn-primary btn-block">Crear cuenta</button>
@@ -37,17 +37,20 @@
     </footer>
   </section>
 </main>
+<script src="js/security.js"></script>
 <script src="js/api.js"></script>
 <script>
 const msgEl=document.getElementById('msg');
 function showMsg(t,ty){msgEl.textContent=t;msgEl.className='msg show '+(ty==='error'?'error':'success');}
 document.getElementById('form-register').addEventListener('submit', async(e)=>{
   e.preventDefault();
-  const payload={
-    nombre:document.getElementById('nombre').value.trim(),
-    correo:document.getElementById('correo').value.trim(),
-    contrasena:document.getElementById('contrasena').value
-  };
+  const nombre=document.getElementById('nombre').value.trim();
+  const correo=document.getElementById('correo').value.trim().toLowerCase();
+  const contrasena=document.getElementById('contrasena').value;
+  if(nombre.length<2){ showMsg('Nombre debe tener al menos 2 caracteres','error'); return; }
+  if(!isValidEmail(correo)){ showMsg('Correo no válido','error'); return; }
+  if(!isValidPassword(contrasena)){ showMsg('Contraseña 8-72 caracteres','error'); return; }
+  const payload={nombre,correo,contrasena};
   const btn=e.target.querySelector('button'); btn.disabled=true; btn.textContent='Creando...';
   try{
     await apiRegister(payload);
