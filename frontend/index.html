@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Finanzas Personales</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <h1>💜 Finanzas Personales</h1>
+  <div class="user-area">
+    <span id="user-info">Cargando...</span>
+    <button id="btn-logout">Cerrar sesión</button>
+  </div>
+</header>
+
+<div class="container">
+  <!-- KPIs -->
+  <h2 class="section-title">Resumen</h2>
+  <div class="cards-grid">
+    <div class="card ingresos"><h3>Ingresos</h3><p id="card-ingresos">$0</p><small id="card-ingresos-sub">Total periodo</small></div>
+    <div class="card gastos"><h3>Gastos</h3><p id="card-gastos">$0</p><small id="card-gastos-sub">Total periodo</small></div>
+    <div class="card balance"><h3>Balance</h3><p id="card-balance">$0</p><small id="card-balance-sub">Ahorro</small></div>
+    <div class="card highlight"><h3>Predicción próximo mes</h3><p id="card-prediccion">$0</p><small id="card-prediccion-sub">Regresión lineal</small></div>
+  </div>
+
+  <!-- Alertas -->
+  <div id="alerta-anomalias" class="alert-box">
+    <h3>⚠️ Gastos anómalos detectados</h3>
+    <ul id="lista-anomalias"></ul>
+    <small id="anomalias-meta" style="color:#92400E"></small>
+  </div>
+
+  <!-- Filtros resumen -->
+  <div class="panel">
+    <div class="panel-header">
+      <h2>Filtros</h2>
+      <div class="filters">
+        <input type="month" id="filtro-mes">
+        <input type="date" id="filtro-desde" placeholder="Desde">
+        <input type="date" id="filtro-hasta" placeholder="Hasta">
+        <button class="btn btn-ghost btn-small" id="btn-filtrar">Aplicar</button>
+        <button class="btn btn-ghost btn-small" id="btn-limpiar">Limpiar</button>
+      </div>
+    </div>
+    <small style="color:#6B7280">Filtra por mes o rango. Afecta KPIs y tablas, no la predicción (usa todo el histórico).</small>
+  </div>
+
+  <!-- Gráficos -->
+  <div class="charts-grid">
+    <div class="chart-container">
+      <h3>Gastos por categoría</h3>
+      <canvas id="chartCategorias"></canvas>
+      <div id="chartCategorias-empty" class="empty" style="display:none">Sin gastos para mostrar</div>
+    </div>
+    <div class="chart-container">
+      <h3>Tendencia mensual (ingresos vs gastos)</h3>
+      <canvas id="chartTendencia"></canvas>
+      <div id="chartTendencia-empty" class="empty" style="display:none">Sin datos mensuales</div>
+    </div>
+  </div>
+
+  <!-- Gestión categorías -->
+  <div class="panel">
+    <div class="panel-header">
+      <h2>Categorías</h2>
+      <span style="font-size:0.82rem;color:#6B7280">Ingresos y gastos</span>
+    </div>
+    <form id="form-categoria" class="form-grid" style="margin-bottom:12px">
+      <div><label>Nombre</label><input type="text" id="cat-nombre" required placeholder="Ej. Educación"></div>
+      <div><label>Tipo</label><select id="cat-tipo" required><option value="gasto">Gasto</option><option value="ingreso">Ingreso</option></select></div>
+      <div><button type="submit" class="btn btn-primary" style="width:100%">Crear</button></div>
+    </form>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Nombre</th><th>Tipo</th><th>Acciones</th></tr></thead>
+        <tbody id="tabla-categorias"><tr><td colspan="3" class="loading">Cargando...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Registrar movimiento -->
+  <div class="panel">
+    <h2 style="margin-bottom:12px">Registrar movimiento</h2>
+    <form id="form-movimiento" class="form-grid">
+      <div><label>Monto *</label><input type="number" id="monto" placeholder="85000" step="0.01" min="0.01" required></div>
+      <div><label>Fecha *</label><input type="date" id="fecha" required></div>
+      <div><label>Tipo *</label><select id="tipo" required><option value="gasto">Gasto</option><option value="ingreso">Ingreso</option></select></div>
+      <div><label>Categoría *</label><select id="categoria" required></select></div>
+      <div style="grid-column:1/-1"><label>Descripción</label><input type="text" id="descripcion" placeholder="Mercado quincenal" maxlength="255"></div>
+      <div><button type="submit" class="btn btn-primary" style="width:100%">Guardar</button></div>
+      <div><button type="button" class="btn btn-ghost" style="width:100%" id="btn-cancelar-edicion" style="display:none">Cancelar edición</button></div>
+    </form>
+    <input type="hidden" id="edit-id">
+  </div>
+
+  <!-- Tabla movimientos -->
+  <div class="panel">
+    <div class="panel-header">
+      <h2>Movimientos recientes</h2>
+      <div class="filters">
+        <select id="filtro-cat-tabla"><option value="">Todas categorías</option></select>
+        <select id="filtro-tipo-tabla"><option value="">Todos tipos</option><option value="ingreso">Ingresos</option><option value="gasto">Gastos</option></select>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Fecha</th><th>Categoría</th><th>Tipo</th><th>Monto</th><th>Descripción</th><th>Acciones</th></tr></thead>
+        <tbody id="tabla-movimientos"><tr><td colspan="6" class="loading">Cargando...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

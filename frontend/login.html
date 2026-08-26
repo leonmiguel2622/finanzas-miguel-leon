@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingresar - Finanzas Personales</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h1>💜 Finanzas Personales</h1>
+    <p class="sub">Ingresa a tu dashboard</p>
+    <div id="msg" class="msg"></div>
+    <form id="form-login">
+      <div>
+        <label>Correo</label>
+        <input type="email" id="correo" required placeholder="ana@example.com">
+      </div>
+      <div>
+        <label>Contraseña</label>
+        <input type="password" id="contrasena" required placeholder="••••••••" minlength="8">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%">Ingresar</button>
+    </form>
+    <p class="link">¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+    <p class="link" style="margin-top:6px;font-size:0.82rem;color:#6B7280">Demo: ana@example.com / 12345678</p>
+  </div>
+</div>
+<script src="js/api.js"></script>
+<script>
+const form = document.getElementById('form-login');
+const msgEl = document.getElementById('msg');
+function showMsg(text, type){
+  msgEl.textContent=text;
+  msgEl.className='msg show '+(type==='error'?'error':'success');
+}
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const correo=document.getElementById('correo').value.trim();
+  const contrasena=document.getElementById('contrasena').value;
+  const btn=form.querySelector('button');
+  btn.disabled=true; btn.textContent='Ingresando...';
+  try{
+    const data=await apiLogin(correo,contrasena);
+    localStorage.setItem('id_usuario', data.id_usuario);
+    localStorage.setItem('nombre', data.nombre);
+    localStorage.setItem('correo', data.correo);
+    showMsg('¡Bienvenido '+data.nombre+'! Redirigiendo...','success');
+    setTimeout(()=> location.href='index.html', 800);
+  }catch(err){
+    showMsg(err.message||'Error al ingresar','error');
+  }finally{
+    btn.disabled=false; btn.textContent='Ingresar';
+  }
+});
+if(localStorage.getItem('id_usuario')){
+  // opcional auto-redirect si ya logueado
+}
+</script>
+</body>
+</html>
