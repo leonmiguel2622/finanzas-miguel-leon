@@ -1,14 +1,13 @@
-# Finanzas Personales - Requisitos para Render / deployment raíz
-# Si en Render usas Root Directory = backend, este archivo no es necesario (usa backend/requirements.txt)
-# Si usas Root Directory = (raíz), Render usará este archivo
-fastapi==0.110.0
-uvicorn[standard]==0.29.0
-mysql-connector-python==8.4.0
-pymysql==1.1.1
-pandas==2.2.2
-scikit-learn==1.4.1
-numpy==1.26.4
-bcrypt==4.1.2
-python-dotenv==1.0.1
-pydantic==2.6.3
-pydantic[email]==2.6.3
+# Finanzas Personales - Requisitos para Render
+# Compatibles con Python 3.11 (Render) y 3.13 local
+fastapi>=0.110,<0.125
+uvicorn[standard]>=0.29
+mysql-connector-python>=8.4
+pymysql>=1.1
+pandas>=2.2,<2.3
+numpy>=1.26,<2.0
+scikit-learn>=1.4
+bcrypt>=4.1
+python-dotenv>=1.0
+pydantic>=2.6
+email-validator>=2.0
