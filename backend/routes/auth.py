@@ -1,7 +1,16 @@
 from fastapi import APIRouter, HTTPException
-from database import get_db
-from models.schemas import UsuarioLogin
-from utils.security import verify_password
+try:
+    from database import get_db
+except ImportError:
+    from backend.database import get_db
+try:
+    from models.schemas import UsuarioLogin
+except ImportError:
+    from backend.models.schemas import UsuarioLogin
+try:
+    from utils.security import verify_password
+except ImportError:
+    from backend.utils.security import verify_password
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
 

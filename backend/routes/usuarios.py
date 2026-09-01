@@ -1,8 +1,17 @@
 from fastapi import APIRouter, HTTPException
 from mysql.connector import Error
-from database import get_db
-from models.schemas import UsuarioCreate
-from utils.security import hash_password
+try:
+    from database import get_db
+except ImportError:
+    from backend.database import get_db
+try:
+    from models.schemas import UsuarioCreate
+except ImportError:
+    from backend.models.schemas import UsuarioCreate
+try:
+    from utils.security import hash_password
+except ImportError:
+    from backend.utils.security import hash_password
 
 router = APIRouter(prefix="/api/usuarios", tags=["Usuarios"])
 

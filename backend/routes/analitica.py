@@ -1,6 +1,12 @@
 from fastapi import APIRouter, Query
-from database import get_db
-from services.analitica_service import cargar_datos, predecir_gasto_proximo_mes, detectar_anomalias, UMBRAL_Z_DEFAULT
+try:
+    from database import get_db
+except ImportError:
+    from backend.database import get_db
+try:
+    from services.analitica_service import cargar_datos, predecir_gasto_proximo_mes, detectar_anomalias, UMBRAL_Z_DEFAULT
+except ImportError:
+    from backend.services.analitica_service import cargar_datos, predecir_gasto_proximo_mes, detectar_anomalias, UMBRAL_Z_DEFAULT
 
 router = APIRouter(prefix="/api/analitica", tags=["Analítica"])
 

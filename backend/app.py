@@ -1,7 +1,16 @@
+import os, sys
+# Hace que funcione tanto con Root Directory=backend (uvicorn app:app) como Root Directory=. (uvicorn backend.app:app)
+sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import config
-from routes import usuarios, auth, categorias, movimientos, resumen, analitica
+try:
+    import config
+    from routes import usuarios, auth, categorias, movimientos, resumen, analitica
+except ImportError:
+    from backend import config
+    from backend.routes import usuarios, auth, categorias, movimientos, resumen, analitica
 
 app = FastAPI(
     title="Finanzas Personales API",

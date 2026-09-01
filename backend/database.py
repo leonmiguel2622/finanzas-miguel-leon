@@ -1,6 +1,11 @@
+import os, sys
+sys.path.insert(0, os.path.dirname(__file__))
 import mysql.connector
 from mysql.connector import Error
-import config
+try:
+    import config
+except ImportError:
+    from backend import config
 
 def get_db():
     """Retorna conexión MySQL. Caller debe cerrar con db.close()"""

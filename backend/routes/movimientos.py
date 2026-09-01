@@ -1,8 +1,14 @@
 from fastapi import APIRouter, HTTPException, Query
 from typing import Optional
 from datetime import date
-from database import get_db
-from models.schemas import MovimientoCreate, MovimientoUpdate
+try:
+    from database import get_db
+except ImportError:
+    from backend.database import get_db
+try:
+    from models.schemas import MovimientoCreate, MovimientoUpdate
+except ImportError:
+    from backend.models.schemas import MovimientoCreate, MovimientoUpdate
 from mysql.connector import Error
 
 router = APIRouter(prefix="/api/movimientos", tags=["Movimientos"])

@@ -1,4 +1,4 @@
-USE finanzas_personales;
+-- USE finanzas_personales; -- Comentado para Clever Cloud: usa la DB de la conexión (bhoaaacrey4xvrzjdpdc). Para local, descomenta o ejecuta con: mysql -D finanzas_personales < seed.sql
 
 -- Limpieza para re-ejecutable (orden por FK)
 DELETE FROM ingresos_gastos;

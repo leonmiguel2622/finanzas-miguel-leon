@@ -12,7 +12,10 @@ load_dotenv()
 
 def conectar():
     # Lee credenciales de entorno (Render/Clever Cloud) - no hardcodear
-    import config
+    try:
+        import config
+    except ImportError:
+        from backend import config
     return pymysql.connect(
         host=config.DB_HOST,
         user=config.DB_USER,

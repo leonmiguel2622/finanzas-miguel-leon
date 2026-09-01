@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: finanzas-miguel-leon
+    runtime: python
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn backend.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: PIP_NO_CACHE_DIR
+        value: 1
+      # Configura estas en Dashboard > Environment (son secretas, no las pongas aquí):
+      # - DB_HOST=bhoaaacrey4xvrzjdpdc-mysql.services.clever-cloud.com
+      # - DB_PORT=3306
+      # - DB_USER=u9rbmsykuc9xheqr
+      # - DB_PASSWORD=*** (clic en 🔓 en Clever Cloud)
+      # - DB_NAME=bhoaaacrey4xvrzjdpdc
+      # Alternativa: pega el Connection URI completo como DATABASE_URL=mysql://user:pass@host:3306/db

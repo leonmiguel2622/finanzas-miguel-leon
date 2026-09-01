@@ -1,6 +1,9 @@
 from fastapi import APIRouter, Query, HTTPException
 from typing import Optional
-from database import get_db
+try:
+    from database import get_db
+except ImportError:
+    from backend.database import get_db
 from datetime import datetime
 import calendar
 

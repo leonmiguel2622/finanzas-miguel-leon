@@ -1,6 +1,12 @@
 from fastapi import APIRouter, HTTPException, Query
-from database import get_db
-from models.schemas import CategoriaCreate, CategoriaUpdate
+try:
+    from database import get_db
+except ImportError:
+    from backend.database import get_db
+try:
+    from models.schemas import CategoriaCreate, CategoriaUpdate
+except ImportError:
+    from backend.models.schemas import CategoriaCreate, CategoriaUpdate
 from mysql.connector import Error
 
 router = APIRouter(prefix="/api/categorias", tags=["Categorias"])

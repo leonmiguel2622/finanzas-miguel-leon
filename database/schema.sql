@@ -1,9 +1,9 @@
 -- Finanzas Personales - Schema MySQL 8.0+
 -- 3FN,utf8mb4, validaciones y índices para módulo analítico
-CREATE DATABASE IF NOT EXISTS finanzas_personales
-  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-USE finanzas_personales;
+-- Para Clever Cloud (bhoaaacrey4xvrzjdpdc): NO ejecuta CREATE DATABASE (sin permisos), la DB ya existe. Las tablas se crean en la DB de la conexión.
+-- Para local: descomenta las 2 líneas siguientes si necesitas crear la DB local:
+-- CREATE DATABASE IF NOT EXISTS finanzas_personales CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- USE finanzas_personales;
 
 -- Usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
