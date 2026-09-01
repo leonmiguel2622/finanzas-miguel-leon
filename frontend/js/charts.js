@@ -1,7 +1,8 @@
 let chartDona = null;
 let chartTendencia = null;
 
-const PALETTE = ['#7C3AED','#10B981','#F59E0B','#EF4444','#06B6D4','#EC4899','#8B5CF6','#F97316','#14B8A6','#EAB308'];
+// Palette — editorial, not slop (5 muted + tinted, not 10 screaming)
+const PALETTE = ['#6D28D9','#0E9F6E','#D97706','#0E7A9F','#9F1239','#4338CA'];
 
 function renderDona(porCategoria){
   const ctx = document.getElementById('chartCategorias');
@@ -22,13 +23,14 @@ function renderDona(porCategoria){
   if(chartDona) chartDona.destroy();
   chartDona = new Chart(ctx, {
     type:'doughnut',
-    data:{ labels, datasets:[{ data, backgroundColor, borderWidth:2, borderColor:'#fff' }]},
+    data:{ labels, datasets:[{ data, backgroundColor, borderWidth:2, borderColor:'#fff', hoverOffset:6 }]},
     options:{
       responsive:true,
       maintainAspectRatio:false,
+      animation:{ duration:520, easing:'easeOutQuart' },
       plugins:{
-        legend:{ position:'bottom', labels:{ padding:14, usePointStyle:true }},
-        title:{ display:true, text:'Distribución de gastos', font:{ weight:'700' }},
+        legend:{ position:'bottom', labels:{ padding:14, usePointStyle:true, font:{ family:'Instrument Sans' } }},
+        title:{ display:true, text:'Distribución de gastos', font:{ weight:'700', family:'Instrument Sans' }},
         tooltip:{ callbacks:{ label: ctx=> `${ctx.label}: $${ctx.raw.toLocaleString('es-CO')}` }}
       }
     }
@@ -57,21 +59,23 @@ function renderTendencia(tendencia){
     data:{
       labels,
       datasets:[
-        { label:'Ingresos', data:ingresos, borderColor:'#10B981', backgroundColor:'rgba(16,185,129,0.08)', fill:true, tension:0.35, pointRadius:4, pointBackgroundColor:'#10B981' },
-        { label:'Gastos', data:gastos, borderColor:'#EF4444', backgroundColor:'rgba(239,68,68,0.08)', fill:true, tension:0.35, pointRadius:4, pointBackgroundColor:'#EF4444' }
+        { label:'Ingresos', data:ingresos, borderColor:'#0E9F6E', backgroundColor:'rgba(14,159,110,0.08)', fill:true, tension:0.38, pointRadius:3, pointHoverRadius:5, pointBackgroundColor:'#0E9F6E', borderWidth:2 },
+        { label:'Gastos', data:gastos, borderColor:'#DC2626', backgroundColor:'rgba(220,38,38,0.07)', fill:true, tension:0.38, pointRadius:3, pointHoverRadius:5, pointBackgroundColor:'#DC2626', borderWidth:2 }
       ]
     },
     options:{
       responsive:true,
       maintainAspectRatio:false,
+      animation:{ duration:620, easing:'easeOutQuart' },
       interaction:{ mode:'index', intersect:false },
       plugins:{
-        legend:{ position:'bottom' },
-        title:{ display:true, text:'Ingresos vs Gastos por mes', font:{ weight:'700' }},
+        legend:{ position:'bottom', labels:{ font:{ family:'Instrument Sans' } } },
+        title:{ display:true, text:'Ingresos vs Gastos por mes', font:{ weight:'700', family:'Instrument Sans' }},
         tooltip:{ callbacks:{ label: ctx=> `${ctx.dataset.label}: $${ctx.raw.toLocaleString('es-CO')}` }}
       },
       scales:{
-        y:{ beginAtZero:true, ticks:{ callback: v=> '$'+Number(v).toLocaleString('es-CO') } }
+        y:{ beginAtZero:true, grid:{ color:'#F3F0FF' }, ticks:{ callback: v=> '$'+Number(v).toLocaleString('es-CO'), font:{ family:'JetBrains Mono' } } },
+        x:{ grid:{ display:false }, ticks:{ font:{ family:'Instrument Sans' } } }
       }
     }
   });
