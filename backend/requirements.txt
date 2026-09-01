@@ -1,13 +1,13 @@
-# Finanzas Personales - Requisitos para Render
-# Compatibles con Python 3.11 (Render) y 3.13 local
-fastapi>=0.110,<0.125
-uvicorn[standard]>=0.29
-mysql-connector-python>=8.4
-pymysql>=1.1
-pandas>=2.2,<2.3
-numpy>=1.26,<2.0
-scikit-learn>=1.4
-bcrypt>=4.1
-python-dotenv>=1.0
-pydantic>=2.6
-email-validator>=2.0
+# Finanzas Personales - Requisitos para Render (compatible Python 3.11-3.14)
+# Sin pins estrictos para que pip elija wheels disponibles en cada versión de Python
+fastapi
+uvicorn[standard]
+mysql-connector-python
+pymysql
+pandas
+numpy
+scikit-learn
+bcrypt
+python-dotenv
+pydantic
+email-validator

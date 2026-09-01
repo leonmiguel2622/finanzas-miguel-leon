@@ -5,12 +5,14 @@ services:
     plan: free
     region: oregon
     branch: main
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    buildCommand: pip install --upgrade pip && pip install --prefer-binary -r requirements.txt
     startCommand: uvicorn backend.app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.11
+      - key: PIP_PREFER_BINARY
+        value: 1
       - key: PIP_NO_CACHE_DIR
         value: 1
       # Configura estas en Dashboard > Environment (son secretas, no las pongas aquí):
