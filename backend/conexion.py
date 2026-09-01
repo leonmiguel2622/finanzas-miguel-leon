@@ -11,12 +11,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def conectar():
+    # Lee credenciales de entorno (Render/Clever Cloud) - no hardcodear
+    import config
     return pymysql.connect(
-        host="bhoaaacrey4xvrzjdpdc-mysql.services.clever-cloud.com",
-        user="u9rbmsykuc9xheqr",
-        password="u9rbmsykuc9xheqr", 
-        database="bhoaaacrey4xvrzjdpdc",
-        port=3306,
+        host=config.DB_HOST,
+        user=config.DB_USER,
+        password=config.DB_PASSWORD,
+        database=config.DB_NAME,
+        port=config.DB_PORT,
         cursorclass=pymysql.cursors.DictCursor
     )
 

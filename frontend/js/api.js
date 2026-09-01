@@ -4,7 +4,13 @@ const API_URL = (() => {
     const c = document.cookie.match(/(?:^|; )API_URL=([^;]*)/);
     if(c) return decodeURIComponent(c[1]);
   }catch(e){}
-  return localStorage.getItem('API_URL') || 'http://127.0.0.1:8000/api';
+  const stored = localStorage.getItem('API_URL');
+  if(stored) return stored;
+  // Auto-detect producción: GitHub Pages -> Render, local -> localhost
+  if(location.hostname.includes('github.io') || location.hostname.includes('onrender.com')){
+    return 'https://finanzas-miguel-leon.onrender.com/api';
+  }
+  return 'http://127.0.0.1:8000/api';
 })();
 
 async function apiFetch(path, options = {}) {
