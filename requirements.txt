@@ -1,5 +1,6 @@
 # Finanzas Personales - Requisitos para Render (compatible Python 3.11-3.14)
-# Sin pins estrictos para que pip elija wheels disponibles en cada versión de Python
+# -e . instala wrapper app.py como comando (para que Start Command 'app.py' funcione sin cambiar dashboard)
+-e .
 fastapi
 uvicorn[standard]
 mysql-connector-python

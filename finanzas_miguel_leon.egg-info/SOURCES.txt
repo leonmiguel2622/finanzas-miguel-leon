@@ -1,0 +1,8 @@
+README.md
+app.py
+pyproject.toml
+finanzas_miguel_leon.egg-info/PKG-INFO
+finanzas_miguel_leon.egg-info/SOURCES.txt
+finanzas_miguel_leon.egg-info/dependency_links.txt
+finanzas_miguel_leon.egg-info/entry_points.txt
+finanzas_miguel_leon.egg-info/top_level.txt

@@ -1,0 +1,3 @@
+[console_scripts]
+app = app:main
+app.py = app:main
