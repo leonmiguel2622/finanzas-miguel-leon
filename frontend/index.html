@@ -12,7 +12,7 @@
   <h1>Finanzas Personales</h1>
   <nav class="user-area" aria-label="Usuario">
     <span id="user-info">Cargando...</span>
-    <button id="btn-logout" type="button">Cerrar sesiÃ³n</button>
+    <button id="btn-logout" type="button">Cerrar sesión</button>
   </nav>
 </header>
 
@@ -63,21 +63,21 @@
         <button class="btn btn-ghost btn-small" id="btn-limpiar" type="button">Limpiar</button>
       </form>
     </header>
-    <p class="panel-note">Filtra por mes o rango. Afecta KPIs y tablas, no la predicciÃ³n (usa todo el histÃ³rico).</p>
+    <p class="panel-note">Filtra por mes o rango. Afecta KPIs y tablas, no la predicción (usa todo el histórico).</p>
   </section>
 
   <section class="charts-grid" aria-label="Visualizaciones">
     <article class="chart-container">
       <figure>
         <figcaption><h3>Gastos por categorí­a</h3></figcaption>
-        <canvas id="chartCategorias" role="img" aria-label="GrÃ¡fico de dona de gastos por categorÃ­a"></canvas>
+        <canvas id="chartCategorias" role="img" aria-label="Gráfico de dona de gastos por categoría"></canvas>
         <p id="chartCategorias-empty" class="empty hidden">Sin gastos para mostrar</p>
       </figure>
     </article>
     <article class="chart-container">
       <figure>
         <figcaption><h3>Tendencia mensual (ingresos vs gastos)</h3></figcaption>
-        <canvas id="chartTendencia" role="img" aria-label="GrÃ¡fico de li­neas ingresos vs gastos"></canvas>
+        <canvas id="chartTendencia" role="img" aria-label="Gráfico de li­neas ingresos vs gastos"></canvas>
         <p id="chartTendencia-empty" class="empty hidden">Sin datos mensuales</p>
       </figure>
     </article>
@@ -88,10 +88,10 @@
       <h2 id="categorias-title">Categorías</h2>
       <p class="text-muted">Ingresos y gastos</p>
     </header>
-    <form id="form-categoria" class="form-grid form-categoria" aria-label="Crear categorÃ­a">
+    <form id="form-categoria" class="form-grid form-categoria" aria-label="Crear categoría">
       <div>
         <label for="cat-nombre">Nombre</label>
-        <input type="text" id="cat-nombre" name="cat-nombre" required placeholder="Ej. EducaciÃ³n">
+        <input type="text" id="cat-nombre" name="cat-nombre" required placeholder="Ej. Educación">
       </div>
       <div>
         <label for="cat-tipo">Tipo</label>
@@ -145,7 +145,7 @@
         <button type="submit" class="btn btn-primary btn-block">Guardar</button>
       </div>
       <div>
-        <button type="button" class="btn btn-ghost btn-block hidden" id="btn-cancelar-edicion">Cancelar ediciÃ³n</button>
+        <button type="button" class="btn btn-ghost btn-block hidden" id="btn-cancelar-edicion">Cancelar edición</button>
       </div>
     </form>
     <input type="hidden" id="edit-id" name="edit-id">
@@ -174,11 +174,11 @@
 </main>
 
 <footer class="site-footer">
-  <p>Finanzas Personales â€” Proyecto ADSO Â· Hecho con FastAPI, MySQL y Chart.js Â· <a href="#" id="open-terms">érminos</a></p>
+  <p>Finanzas Personales —€” Proyecto ADSO · Hecho con FastAPI, MySQL y Chart.js · <a href="#" id="open-terms">érminos</a></p>
 </footer>
 
 <aside id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Consentimiento de cookies">
-  <p>Usamos cookies esenciales para tu sesiÃ³n. <a href="#" id="terms-link">Ver TÃ©rminos</a></p>
+  <p>Usamos cookies esenciales para tu sesión. <a href="#" id="terms-link">Ver Términos</a></p>
   <div class="cookie-actions">
     <button id="cookie-decline" class="button is-ghost" type="button">Rechazar</button>
     <button id="cookie-accept" class="button is-primary" type="button">Aceptar</button>
@@ -190,7 +190,7 @@
     <header class="modal-container-header">
       <span class="modal-container-title" id="terms-title">
         <svg aria-hidden="true" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M14 9V4H5v16h6.056c.328.417.724.785 1.18 1.085l1.39.915H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8v1h-7zm-2 2h9v5.949c0 .99-.501 1.916-1.336 2.465L16.5 21.498l-3.164-2.084A2.953 2.953 0 0 1 12 16.95V11zm2 5.949c0 .316.162.614.436.795l2.064 1.36 2.064-1.36a.954.954 0 0 0 .436-.795V13h-5v3.949z" fill="currentColor"></path></svg>
-        TÃ©rminos y Condiciones
+        Términos y Condiciones
       </span>
       <button class="icon-button" id="close-terms-icon" type="button" aria-label="Cerrar">
         <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="currentColor"></path></svg>
@@ -198,10 +198,10 @@
     </header>
     <section class="modal-container-body rtf">
       <p><strong>26 de agosto de 2026</strong></p>
-      <h2>Cookies y sesiÃ³n</h2>
-      <p>Cookies esenciales <code>id_usuario</code> para mantener login 7 dÃ­as. Sin ellas no hay acceso al dashboard.</p>
+      <h2>Cookies y sesión</h2>
+      <p>Cookies esenciales <code>id_usuario</code> para mantener login 7 días. Sin ellas no hay acceso al dashboard.</p>
       <h2>Seguridad</h2>
-      <p>ValidaciÃ³n cliente/servidor, contraseÃ±as bcrypt, bloqueo de inspecciÃ³n como ofuscaciÃ³n.</p>
+      <p>Validación cliente/servidor, contraseñas bcrypt, bloqueo de inspección como ofuscación.</p>
     </section>
     <footer class="modal-container-footer">
       <button class="button is-ghost" id="modal-decline" type="button">Rechazar</button>
