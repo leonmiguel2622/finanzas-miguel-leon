@@ -36,15 +36,15 @@
         <small id="card-balance-sub">Ahorro</small>
       </article>
       <article class="card highlight" aria-labelledby="kpi-prediccion">
-        <h3 id="kpi-prediccion">PredicciÃ³n prÃ³ximo mes</h3>
+        <h3 id="kpi-prediccion">Predicción próximo mes</h3>
         <p id="card-prediccion">$0</p>
-        <small id="card-prediccion-sub">RegresiÃ³n lineal</small>
+        <small id="card-prediccion-sub">Regresión lineal</small>
       </article>
     </section>
   </section>
 
   <aside id="alerta-anomalias" class="alert-box" role="alert" aria-live="polite" aria-labelledby="alerta-title">
-    <h3 id="alerta-title">Gastos anÃ³malos detectados</h3>
+    <h3 id="alerta-title">Gastos anómalos detectados</h3>
     <ul id="lista-anomalias"></ul>
     <small id="anomalias-meta" class="text-anomalias-meta"></small>
   </aside>
@@ -69,7 +69,7 @@
   <section class="charts-grid" aria-label="Visualizaciones">
     <article class="chart-container">
       <figure>
-        <figcaption><h3>Gastos por categorÃ­a</h3></figcaption>
+        <figcaption><h3>Gastos por categorí­a</h3></figcaption>
         <canvas id="chartCategorias" role="img" aria-label="GrÃ¡fico de dona de gastos por categorÃ­a"></canvas>
         <p id="chartCategorias-empty" class="empty hidden">Sin gastos para mostrar</p>
       </figure>
@@ -77,7 +77,7 @@
     <article class="chart-container">
       <figure>
         <figcaption><h3>Tendencia mensual (ingresos vs gastos)</h3></figcaption>
-        <canvas id="chartTendencia" role="img" aria-label="GrÃ¡fico de lÃ­neas ingresos vs gastos"></canvas>
+        <canvas id="chartTendencia" role="img" aria-label="GrÃ¡fico de li­neas ingresos vs gastos"></canvas>
         <p id="chartTendencia-empty" class="empty hidden">Sin datos mensuales</p>
       </figure>
     </article>
@@ -85,7 +85,7 @@
 
   <section class="panel" aria-labelledby="categorias-title">
     <header class="panel-header">
-      <h2 id="categorias-title">CategorÃ­as</h2>
+      <h2 id="categorias-title">Categorías</h2>
       <p class="text-muted">Ingresos y gastos</p>
     </header>
     <form id="form-categoria" class="form-grid form-categoria" aria-label="Crear categorÃ­a">
@@ -106,7 +106,7 @@
     </form>
     <div class="table-wrap">
       <table>
-        <caption class="sr-only">Listado de categorÃ­as</caption>
+        <caption class="sr-only">Listado de categorías</caption>
         <thead>
           <tr><th scope="col">Nombre</th><th scope="col">Tipo</th><th scope="col">Acciones</th></tr>
         </thead>
@@ -134,11 +134,11 @@
         </select>
       </div>
       <div>
-        <label for="categoria">CategorÃ­a *</label>
+        <label for="categoria">Categoría *</label>
         <select id="categoria" name="categoria" required></select>
       </div>
       <div class="col-span-full">
-        <label for="descripcion">DescripciÃ³n</label>
+        <label for="descripcion">Descripción</label>
         <input type="text" id="descripcion" name="descripcion" placeholder="Mercado quincenal" maxlength="255">
       </div>
       <div>
@@ -155,8 +155,8 @@
     <header class="panel-header">
       <h2 id="movimientos-title">Movimientos recientes</h2>
       <form class="filters" aria-label="Filtros de tabla" onsubmit="return false;">
-        <label class="sr-only" for="filtro-cat-tabla">Filtrar por categorÃ­a</label>
-        <select id="filtro-cat-tabla" name="filtro-cat-tabla"><option value="">Todas categorÃ­as</option></select>
+        <label class="sr-only" for="filtro-cat-tabla">Filtrar por categorí­a</label>
+        <select id="filtro-cat-tabla" name="filtro-cat-tabla"><option value="">Todas categorías</option></select>
         <label class="sr-only" for="filtro-tipo-tabla">Filtrar por tipo</label>
         <select id="filtro-tipo-tabla" name="filtro-tipo-tabla"><option value="">Todos tipos</option><option value="ingreso">Ingresos</option><option value="gasto">Gastos</option></select>
       </form>
@@ -165,7 +165,7 @@
       <table>
         <caption class="sr-only">Historial de movimientos</caption>
         <thead>
-          <tr><th scope="col">Fecha</th><th scope="col">CategorÃ­a</th><th scope="col">Tipo</th><th scope="col">Monto</th><th scope="col">DescripciÃ³n</th><th scope="col">Acciones</th></tr>
+          <tr><th scope="col">Fecha</th><th scope="col">Categoría</th><th scope="col">Tipo</th><th scope="col">Monto</th><th scope="col">Descripción</th><th scope="col">Acciones</th></tr>
         </thead>
         <tbody id="tabla-movimientos"><tr><td colspan="6" class="loading">Cargando...</td></tr></tbody>
       </table>
@@ -174,7 +174,7 @@
 </main>
 
 <footer class="site-footer">
-  <p>Finanzas Personales â€” Proyecto ADSO Â· Hecho con FastAPI, MySQL y Chart.js Â· <a href="#" id="open-terms">TÃ©rminos</a></p>
+  <p>Finanzas Personales â€” Proyecto ADSO Â· Hecho con FastAPI, MySQL y Chart.js Â· <a href="#" id="open-terms">érminos</a></p>
 </footer>
 
 <aside id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Consentimiento de cookies">
