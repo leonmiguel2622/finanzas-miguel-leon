@@ -1,6 +1,4 @@
 # Finanzas Personales - Requisitos para Render (compatible Python 3.11-3.14)
-# -e . instala wrapper app.py como comando (para que Start Command 'app.py' funcione sin cambiar dashboard)
--e .
 fastapi
 uvicorn[standard]
 mysql-connector-python

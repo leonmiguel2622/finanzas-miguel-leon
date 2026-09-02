@@ -1,13 +1,9 @@
 [project]
 name = "finanzas-miguel-leon"
 version = "1.0.0"
-description = "Finanzas Personales API"
+description = "Finanzas Personales"
 requires-python = ">=3.11"
 dependencies = []
 
-[project.scripts]
-app = "app:main"
-
 [tool.setuptools]
 py-modules = ["app"]
-scripts = ["app.py"]
