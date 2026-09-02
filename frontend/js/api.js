@@ -166,29 +166,23 @@ function mockApi(path, options={}){
 }
 
 async function apiFetch(path, options = {}) {
-  const url = `${API_URL}${path}`;
-  try{
-    const res = await fetch(url, {
-      headers: { 'Content-Type': 'application/json', ...(options.headers||{}) },
-      ...options
-    });
-    const text = await res.text();
-    let data;
-    try { data = text ? JSON.parse(text) : null; } catch { data = text; }
-    if (!res.ok) {
-      const msg = (data && data.detail) ? (Array.isArray(data.detail) ? data.detail.map(d=>d.msg||JSON.stringify(d)).join(', ') : data.detail) : (data && data.mensaje ? data.mensaje : `Error ${res.status}`);
-      throw new Error(msg);
-    }
-    return data;
-  }catch(e){
-    // Si estamos en GitHub Pages y falla red, usa mock
-    const isNetwork = e.message.includes('Failed to fetch') || e.message.includes('NetworkError') || e.name==='TypeError';
-    if(isMockMode() && isNetwork){
-      console.warn('[demo] backend no disponible, usando mock para', path, e.message);
-      return mockApi(path, options);
-    }
-    throw e;
+  // En GitHub Pages usa mock instantáneo (evita 15s timeout a Render caído)
+  if(isMockMode()){
+    return mockApi(path, options);
   }
+  const url = `${API_URL}${path}`;
+  const res = await fetch(url, {
+    headers: { 'Content-Type': 'application/json', ...(options.headers||{}) },
+    ...options
+  });
+  const text = await res.text();
+  let data;
+  try { data = text ? JSON.parse(text) : null; } catch { data = text; }
+  if (!res.ok) {
+    const msg = (data && data.detail) ? (Array.isArray(data.detail) ? data.detail.map(d=>d.msg||JSON.stringify(d)).join(', ') : data.detail) : (data && data.mensaje ? data.mensaje : `Error ${res.status}`);
+    throw new Error(msg);
+  }
+  return data;
 }
 
 // Auth
