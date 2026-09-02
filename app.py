@@ -19,8 +19,15 @@ except ImportError:
 
 def main():
     import uvicorn
-    port = int(os.getenv("PORT", "10000"))
-    # host 0.0.0.0 obligatorio en Render
+    # respeta PORT de Render, si no usa API_PORT de config/.env (8000 local)
+    try:
+        from backend.config import API_PORT as CFG_PORT
+    except ImportError:
+        try:
+            from config import API_PORT as CFG_PORT
+        except ImportError:
+            CFG_PORT = 8000
+    port = int(os.getenv("PORT") or os.getenv("API_PORT") or str(CFG_PORT))
     uvicorn.run(app, host="0.0.0.0", port=port)
 
 if __name__ == "__main__":
